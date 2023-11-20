@@ -1,7 +1,9 @@
 // 変数の初期化
 let untyped='';
+let typed='';
 // html要素の取得
 const untypedfield=document.getElementById('untyped');
+const typedfield=document.getElementById('typed');
 // textlist
 const textList=[
   'Hello World','This is my App','How are you?',
@@ -20,6 +22,9 @@ const textList=[
 ];
 // ランダムなテキスト表示（関数の作成）
 const createText=()=>{
+  typed='';
+  typedfield.textContent=typed;
+
   let random=Math.floor(Math.random()*textList.length);
 
   // untypedがtextListの一番目
@@ -29,3 +34,38 @@ const createText=()=>{
 };
 // html上に表示
 createText();
+
+// キー入力の判定
+const keyPress=e=>{
+
+  // 誤タイプ
+  if(e.key!==untyped.substring(0,1)){
+    return;
+  }
+  typed+=untyped.substring(0,1);
+  untyped=untyped.substring(1);
+  typedfield.textContent=typed;
+  untypedfield.textContent=untyped;
+
+  if(untyped==''){
+    createText();
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// キーボードイベント処理
+document.addEventListener('keypress',keyPress)
