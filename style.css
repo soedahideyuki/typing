@@ -17,6 +17,7 @@ body{
 .typed{
   color: lightgreen;
 }
+/* javascriptで使用 */
 .mistyped{
   background-color: red;
 }

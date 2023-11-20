@@ -4,6 +4,7 @@ let typed='';
 // html要素の取得
 const untypedfield=document.getElementById('untyped');
 const typedfield=document.getElementById('typed');
+const wrap=document.getElementById('wrap');
 // textlist
 const textList=[
   'Hello World','This is my App','How are you?',
@@ -38,15 +39,20 @@ createText();
 // キー入力の判定
 const keyPress=e=>{
 
-  // 誤タイプ
+  // 誤タイプ（入力内容とUntypedの先頭が不一致だと返す）
   if(e.key!==untyped.substring(0,1)){
+    // クラスの追加
+    wrap.classList.add('mistyped');
     return;
   }
+  // 正タイプ（入力された文字をtypedに移動する）
+  // クラスの削除
+  wrap.classList.remove('mistyped');
   typed+=untyped.substring(0,1);
   untyped=untyped.substring(1);
   typedfield.textContent=typed;
   untypedfield.textContent=untyped;
-
+// もしuntypedが0文字になったら新しいテキストを表示
   if(untyped==''){
     createText();
   }
