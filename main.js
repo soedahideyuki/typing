@@ -1,6 +1,7 @@
 // 変数の初期化
 let untyped='';
 let typed='';
+let score=0;
 // html要素の取得
 const untypedfield=document.getElementById('untyped');
 const typedfield=document.getElementById('typed');
@@ -57,19 +58,41 @@ const keyPress=e=>{
   untyped=untyped.substring(1);
   typedfield.textContent=typed;
   untypedfield.textContent=untyped;
+  // スコアのインクリメント（＋＋）
+  score++;
 // もしuntypedが0文字になったら新しいテキストを表示
   if(untyped==''){
     createText();
   }
 };
 
-// タイピングスキルのランクを判定
-const rankCheck=score=>{};
+// タイピングスキルのランク
+const rankCheck=score=>{
+  // スコアの値を返す（未実施） retune`${score}文字を打てました！`;
+  // テキスト格納する変数を作る(結果に応じてテキストを変更する空欄の変数)
+  let text='';
+  // スコアに応じて異なるメッセージを変数textに格納する
+  if(score<100){
+    text=`あなたのランクはCです。\nBランクまであと${100-score}文字です。`;
+  }
+  else if(score<200){
+    text=`あなたのランクはBです。\nAランクまであと${200-score}文字です。`;
+  }
+  else if(score<300){
+    text=`あなたのランクはAです。\nSランクまであと${300-score}文字です。`;
+  }
+  else if(score>=300){
+    text=`あなたのランクはSです。\nおめでとうございます。`;
+  }
+// 生成したメッセージと一緒に文字列を返す
+return`${score}文字打てました!\n${text}\n【OK】リトライ/【キャンセル】終了`;
+};
 
 // ゲーム終了
 const gameOver=id=>{
   clearInterval(id);
-  console.log('ゲーム終了!');
+  // スコアを表示する
+  const result=confirm(rankCheck(score));
 };
 
 // カウントダウンタイマー
