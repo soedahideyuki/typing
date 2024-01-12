@@ -9,6 +9,8 @@ const wrap=document.getElementById('wrap');
 const start=document.getElementById('start');
 const count=document.getElementById('count');
 const typeScore=document.getElementById('score');
+const timeUP=document.getElementById('timeup');
+
 // textlist
 const textList=[
   'Hello World','This is my App','How are you?',
@@ -93,8 +95,15 @@ return`${score}文字打てました!\n${text}\n【OK】リトライ/【キャ�
 // ゲーム終了
 const gameOver=id=>{
   clearInterval(id);
+  setTimeout(()=>{
+        untypedfield.style.display='none';
+        typedfield.style.display='none';
+        timeUP.textContent='タイムアップ';
+      }, 100);
   // スコアを表示する
-  const result=confirm(rankCheck(score));
+  setTimeout(()=>{
+    const result=confirm(rankCheck(score));
+  }, 500);
 };
 
 // カウントダウンタイマー
@@ -109,6 +118,7 @@ const timer=()=>{
     // 処理②カウントが0になったらタイマーを停止する
     if(time<=0){
       gameOver(id);
+      
     }
   },1000);
 };
