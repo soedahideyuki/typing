@@ -8,6 +8,7 @@ const typedfield=document.getElementById('typed');
 const wrap=document.getElementById('wrap');
 const start=document.getElementById('start');
 const count=document.getElementById('count');
+const typeScore=document.getElementById('score');
 // textlist
 const textList=[
   'Hello World','This is my App','How are you?',
@@ -38,7 +39,7 @@ const createText=()=>{
 };
 
 // キー入力の判定
-const keyPress=e=>{
+const keyPress=(e)=>{
 
   // 誤タイプ（入力内容とUntypedの先頭が不一致だと返す）
   if(e.key!==untyped.substring(0,1)){
@@ -60,6 +61,7 @@ const keyPress=e=>{
   untypedfield.textContent=untyped;
   // スコアのインクリメント（＋＋）
   score++;
+  typeScore.textContent= score;
 // もしuntypedが0文字になったら新しいテキストを表示
   if(untyped==''){
     createText();
@@ -125,3 +127,4 @@ start.addEventListener('click',()=>{
 });
 
 untypedfield.textContent='スタートボタンで開始';
+
