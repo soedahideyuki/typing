@@ -8,6 +8,7 @@ const typedfield=document.getElementById('typed');
 const wrap=document.getElementById('wrap');
 const start=document.getElementById('start');
 const count=document.getElementById('count');
+const countDown=document.getElementById('count-down');
 const typeScore=document.getElementById('score');
 const timeUP=document.getElementById('timeup');
 
@@ -118,22 +119,42 @@ const timer=()=>{
     // 処理②カウントが0になったらタイマーを停止する
     if(time<=0){
       gameOver(id);
-      
     }
   },1000);
 };
 
 // ゲームスタート時の処理
 start.addEventListener('click',()=>{
-// カウントダウンタイマーを開始する(関数の挿入)
-  timer();
-// ランダムなテキスト表示（関数の挿入）
-  createText();
-  // スタートボタンの非表示
-  start.style.display='none';
+  untypedfield.style.display='none';
+  countDown.textContent= 3 ;
+  let count = countDown.textContent;
+  const id = setInterval(()=>{
+    count--;
+    countDown.textContent = count;
 
-  // キーボードのイベント処理
-  document.addEventListener('keypress',keyPress);
+    if(count<=0){
+      clearInterval(id);
+      countDown.style.display='none';
+      untypedfield.style.display='inline';
+      // カウントダウンタイマーを開始する(関数の挿入)
+      timer();
+      // ランダムなテキスト表示（関数の挿入）
+      createText();
+      // スタートボタンの非表示
+      start.style.display='none';
+    
+      // キーボードのイベント処理
+      document.addEventListener('keypress',keyPress);}
+  },1000);
+// // カウントダウンタイマーを開始する(関数の挿入)
+//   timer();
+// // ランダムなテキスト表示（関数の挿入）
+//   createText();
+//   // スタートボタンの非表示
+//   start.style.display='none';
+
+//   // キーボードのイベント処理
+//   document.addEventListener('keypress',keyPress);
 });
 
 untypedfield.textContent='スタートボタンで開始';
